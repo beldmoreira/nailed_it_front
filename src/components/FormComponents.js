@@ -39,7 +39,7 @@ const Input = styled.input`
   width: 100%;
 
   color: #000;
-  background: #FFFFFF;
+  background:#F2F2F2;
   padding: 15px 16px;
   border-radius: 5px;
 
