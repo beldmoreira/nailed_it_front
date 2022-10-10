@@ -1,37 +1,46 @@
-import React, { useState } from 'react';
+import { useContext,useState} from "react";
 import {useNavigate} from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
+import {UserContext} from "../../contexts/UserContext";
+import {TokenContext} from "../../contexts/TokenContext";
+import Swal from 'sweetalert2';
+import {ThreeDots} from 'react-loader-spinner';
 import api from '../../services/api';
 import {Container, Form, Input, Button, StyledLink} from "../../components/FormComponents"
 import Logo from "../../components/Logo";
 
 
 function Login() {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
+  const [formData, setFormData] = useState({ email: '', password: '' })
+  const {setToken} = useContext(TokenContext);
+  const {setUserData} = useContext(UserContext);
+  const [loading,setLoading]= useState(false);
+  const navigate = useNavigate();
+
+  function handleChange(e) {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    setLoading(true);
+    api.login(formData).then(res => {
+      localStorage.setItem("token", res.data);
+      localStorage.setItem("userData");
+      setToken(res.data);
+      setUserData(res.data);
+      setLoading(false);
+      navigate("/home");
+    }).catch(err => {
+      Swal.fire({
+        title: 'Error!',
+        text: 'Check your info and try again, please',
+        icon: 'error',
+        confirmButtonText: 'Cool'
       });
-    const navigation = useNavigate();
-    function handleChange({ target }) {
-        setFormData({ ...formData, [target.name]: target.value });
-      }
-      const { login } = useAuth();
-      async function handleSubmit(e) {
-        e.preventDefault();
-    
-        const user = { ...formData };
-    
-        try {
-          const { data } = await api.login(user);
-          login(data);
-          navigation('/home');
-        } catch (error) {
-          console.log(error);
-          alert("Erro, tente novamente");
-        }
-      }
-
-
+      setLoading(false);
+    });
+  }
+  
     return (
         <Container>
             <Logo/> 
@@ -42,19 +51,26 @@ function Login() {
                     onChange={(e) => handleChange(e)}
                     name="email"
                     value={formData.email}
+                    disabled={loading}
                     required
                 />
                 <Input
-                    placeholder="Senha"
+                    placeholder="Password"
                     type="password"
                     onChange={(e) => handleChange(e)}
                     name="password"
                     value={formData.password}
+                    disabled={loading}
                     required
                 />
-            <Button type="submit"> Entrar </Button>
+            <Button type="submit" disabled={loading}>
+                {
+                    loading
+                    ?<ThreeDots color="#FFFFFF" height="11" width="43" /> 
+                    :"Login"}
+            </Button>
             </Form>
-            <StyledLink to="/signup">Primeira vez? Cadastre-se!</StyledLink>
+            <StyledLink to="/signup">First time? Sign Up!</StyledLink>
         </Container>
     )
 }
