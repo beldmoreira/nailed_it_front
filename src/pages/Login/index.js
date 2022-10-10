@@ -29,7 +29,7 @@ function Login() {
       setToken(res.data);
       setUserData(res.data);
       setLoading(false);
-      navigate("/home");
+      navigate("/nailpolishes");
     }).catch(err => {
       Swal.fire({
         title: 'Error!',
