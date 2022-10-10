@@ -1,13 +1,14 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   align-self: ${(props) => props.alignSelf || 'initial'};
-  padding: 0px 25px;
+  padding: 0px 25px 25px;
   background: #3D415A;
   width: 100%;
   height: 100%;
@@ -23,7 +24,7 @@ const Form = styled.form`
   align-items: center;
   gap: 12px;
 
-  margin-bottom: 32px;
+  margin-bottom: 15px;
 
   @media (max-width: 700px) {
     width: 100%;
@@ -54,6 +55,9 @@ const Button = styled.button`
   cursor: pointer;
 
   width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   font-size: 20px;
   font-style: normal;
@@ -65,7 +69,7 @@ const Button = styled.button`
 
   padding: 12px;
   color: #FFF;
-  background: ##3D415A;
+  background-color: #3D415A;
   border-radius: 5px;
 `;
 
@@ -77,7 +81,7 @@ const StyledLink = styled(Link)`
   color: #FFF;
   font-style: normal;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 17px;
   line-height: 18px;
 `;
 
