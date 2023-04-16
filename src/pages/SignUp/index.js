@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 function SignUp() {
   const navigate = useNavigate();
-  const [formData, setFormData] = useState({ name: '',lastName: '', email: '', password: '', confirmPassword: '' });
+  const [formData, setFormData] = useState({ name: '',last_name: '', email: '', password: '' });
   const [loading,setLoading]= useState(false);
 
   function handleChange(e) {
@@ -49,8 +49,8 @@ function SignUp() {
           placeholder="Last Name"
           type="text"
           onChange={(e) => handleChange(e)}
-          name="lastName"
-          value={formData.lastName}
+          name="last_name"
+          value={formData.last_name}
           disabled={loading}
           required
         />
@@ -71,16 +71,6 @@ function SignUp() {
           name="password"
           value={formData.password}
           pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{10,12}$"
-          disabled={loading}
-          required
-        />
-        <Input
-          placeholder="Confirm password"
-          type="password"
-          onChange={(e) => handleChange(e)}
-          name="confirmPassword"
-          value={formData.confirmPassword}
-          pattern={formData.password}
           disabled={loading}
           required
         />
