@@ -57,6 +57,7 @@ function Login() {
                 <Input
                     placeholder="Password"
                     type="password"
+                    autoComplete="on"
                     onChange={(e) => handleChange(e)}
                     name="password"
                     value={formData.password}
