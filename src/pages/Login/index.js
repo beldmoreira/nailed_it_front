@@ -25,12 +25,13 @@ function Login() {
     setLoading(true);
     api.login(formData).then(res => {
       localStorage.setItem("token", res.data);
-      localStorage.setItem("userData");
+      localStorage.setItem("userData",res.data);
       setToken(res.data);
       setUserData(res.data);
       setLoading(false);
       navigate("/nailpolishes");
     }).catch(err => {
+      console.log(err)
       Swal.fire({
         title: 'Error!',
         text: 'Check your info and try again, please',
