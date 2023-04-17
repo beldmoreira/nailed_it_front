@@ -1,14 +1,17 @@
 import React from "react";
 import miniLogo from "../assets/mini-logo.png"
 import styled from "styled-components";
+import {Link} from "react-router-dom";
 
 function Header(){
     return (
         <Container>
-        <img src ={miniLogo} alt = "Logo" style={{width: 100, height:100}}/>
-        <Slogan>
-        <WhiteSlogan>NAIL</WhiteSlogan><PinkSlogan>CHOOSER</PinkSlogan>
-        </Slogan>
+            <Link to ="/nailpolishes" target="_blank" rel="noreferrer">  
+            <img src ={miniLogo} alt = "Logo" style={{width: 125, height:102}}/>
+            </Link> 
+            <Slogan>
+                <WhiteSlogan>NAIL</WhiteSlogan><PinkSlogan>CHOOSER</PinkSlogan>
+            </Slogan>
         </Container>
     )
 }
